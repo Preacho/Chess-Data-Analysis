@@ -51,8 +51,8 @@ def main():
             evals, clocks = parse_clk_column(row['Clk'])
 
             # Convert list to comma-separated string to remove quotes
-            all_evals.append(', '.join(map(str, evals)))
-            all_clocks.append(', '.join(map(str, clocks)))
+            all_evals.append(' '.join(map(str, evals)))
+            all_clocks.append(' '.join(map(str, clocks)))
 
         # Add the extracted evaluations and clock times as new columns
         dataframe_filter['Evaluations'] = all_evals
