@@ -42,7 +42,7 @@ def main():
         white_data = df[df['Player'] == 1]
         black_data = df[df['Player'] == 0]
 
-        plt.scatter(white_data['calc_time'], white_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o', label=f'White & Black (o) {csv_file}')
+        plt.scatter(white_data['calc_time'], white_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o', label=f'Player (o) {csv_file}')
         plt.scatter(black_data['calc_time'], -black_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o')
 
         # Perform linear regression for players
@@ -52,7 +52,7 @@ def main():
                 
         plt.xlabel('Calculation Time')
         plt.ylabel('Calculation Evaluation')
-        plt.title(f'Calculation Evaluation vs. Calculation Time for White Players ({csv_file})')
+        plt.title(f'Calculation Evaluation vs. Calculation Time for ({csv_file})')
         plt.legend()
         #plt.show()
         plt.savefig(f'players_{csv_file.replace(".csv", "")}.png')
