@@ -40,37 +40,22 @@ def main():
         # Plot scatter plot for White players
         plt.figure(figsize=(10, 5))
         white_data = df[df['Player'] == 1]
-        plt.scatter(white_data['calc_time'], white_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o', label=f'White (o) {csv_file}')
+        black_data = df[df['Player'] == 0]
 
-        # Perform linear regression for White players
+        plt.scatter(white_data['calc_time'], white_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o', label=f'White & Black (o) {csv_file}')
+        plt.scatter(black_data['calc_time'], -black_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o')
+
+        # Perform linear regression for players
         fit = linregress(white_data['calc_time'], white_data['Calc_Eval'])
         regression_line = fit.slope * white_data['calc_time'] + fit.intercept
-        plt.plot(white_data['calc_time'], regression_line, color='red', linestyle='--', label=f'Regression Line (White)')
+        plt.plot(white_data['calc_time'], regression_line, color='red', linestyle='--', label=f'Regression Line')
                 
         plt.xlabel('Calculation Time')
         plt.ylabel('Calculation Evaluation')
         plt.title(f'Calculation Evaluation vs. Calculation Time for White Players ({csv_file})')
         plt.legend()
         #plt.show()
-        plt.savefig(f'white_players_{csv_file.replace(".csv", "")}.png')
-        plt.close()
-        
-        # Plot scatter plot for Black players
-        plt.figure(figsize=(10, 5))
-        black_data = df[df['Player'] == 0]
-        plt.scatter(black_data['calc_time'], -black_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='^', label=f'Black (x) {csv_file}')
-        
-        # Perform linear regression for Black players
-        fit = linregress(black_data['calc_time'], -black_data['Calc_Eval'])
-        regression_line = fit.slope * black_data['calc_time'] + fit.intercept
-        plt.plot(black_data['calc_time'], regression_line, color='red', linestyle='--', label=f'Regression Line (Black)')
-
-        plt.xlabel('Calculation Time')
-        plt.ylabel('Calculation Evaluation')
-        plt.title(f'Calculation Evaluation vs. Calculation Time for Black Players ({csv_file})')
-        plt.legend()
-        #plt.show()
-        plt.savefig(f'black_players_{csv_file.replace(".csv", "")}.png')
+        plt.savefig(f'players_{csv_file.replace(".csv", "")}.png')
         plt.close()
 
 
