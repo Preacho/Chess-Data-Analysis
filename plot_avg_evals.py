@@ -4,6 +4,7 @@ import sys
 import re
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import linregress
 
 
 
@@ -21,7 +22,7 @@ def main():
     ]
     
     colors = [
-        'blue', 'green', 'red', 'purple', 'orange', 'brown', 'pink'
+        'blue', 'green', 'yellow', 'purple', 'orange', 'brown', 'pink'
     ]
     
     # Combine all data into a single DataFrame
@@ -40,6 +41,11 @@ def main():
         plt.figure(figsize=(10, 5))
         white_data = df[df['Player'] == 1]
         plt.scatter(white_data['calc_time'], white_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='o', label=f'White (o) {csv_file}')
+
+        # Perform linear regression for White players
+        fit = linregress(white_data['calc_time'], white_data['Calc_Eval'])
+        regression_line = fit.slope * white_data['calc_time'] + fit.intercept
+        plt.plot(white_data['calc_time'], regression_line, color='red', linestyle='--', label=f'Regression Line (White)')
                 
         plt.xlabel('Calculation Time')
         plt.ylabel('Calculation Evaluation')
@@ -53,7 +59,12 @@ def main():
         plt.figure(figsize=(10, 5))
         black_data = df[df['Player'] == 0]
         plt.scatter(black_data['calc_time'], -black_data['Calc_Eval'], c=colors[i], edgecolor='black', marker='^', label=f'Black (x) {csv_file}')
-                
+        
+        # Perform linear regression for Black players
+        fit = linregress(black_data['calc_time'], -black_data['Calc_Eval'])
+        regression_line = fit.slope * black_data['calc_time'] + fit.intercept
+        plt.plot(black_data['calc_time'], regression_line, color='red', linestyle='--', label=f'Regression Line (Black)')
+
         plt.xlabel('Calculation Time')
         plt.ylabel('Calculation Evaluation')
         plt.title(f'Calculation Evaluation vs. Calculation Time for Black Players ({csv_file})')
