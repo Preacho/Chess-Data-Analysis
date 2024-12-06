@@ -23,21 +23,6 @@ def get_game_data(chess_data):
         "Moves": " ".join(str(move) for move in chess_data.mainline_moves()),
 
     }
-def Bracket1Elo(chess_data):
-    return int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 < 1000 
-
-def Bracket2Elo(chess_data):
-    return int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 >= 1000 and ...
-    int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 < 1500 
-
-def Bracket3Elo(chess_data):
-    return int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 >= 1500 and ...
-    int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 < 2000 
-
-def Bracket4Elo(chess_data):
-    return int(chess_data['WhiteElo']) + int(chess_data['BlackElo']) / 2 >= 2000
-
-
 
 def main():
 
