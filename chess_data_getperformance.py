@@ -80,7 +80,8 @@ def main():
         chess_data.dropna(inplace=True)
         game_performance = chess_data.apply(lambda x: get_game_performance(x), axis = 1)    
         game_performance = pd.concat(game_performance.tolist(), ignore_index = True)
-
+    
+        game_performance = game_performance[game_performance['calc_time'] >=0]
         game_performance.to_csv(output_directory + chess_data_csv_output_list[index], index = False,  encoding="utf-8")
     
     
