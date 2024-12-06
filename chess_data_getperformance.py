@@ -45,9 +45,7 @@ def get_game_performance(game):
     time = game['Clocks'].split(' ')
     max = 0
     if(len(eval_score) <= len(time)) : max = len(eval_score)
-    else:
-        print(game) 
-        max = len(time)
+    else: max = len(time)
 
     dataframe = pd.DataFrame({"Eval" : eval_score[:max], 'Time' : time[:max], 'Turn' : list(range(1,max+1))})
     dataframe['Previous_Eval'] = dataframe['Eval'].shift(1)
@@ -74,15 +72,10 @@ def main():
 
     game_performance_white = game_performance_white.groupby('calc_time').agg({'calc_eval': 'mean'}).reset_index()
     game_performance_black = game_performance_black.groupby('calc_time').agg({'calc_eval': 'mean'}).reset_index()
-
-    plt.figure(figsize=(14, 10))
-    plt.xlabel('Clock Time (seconds)')
-    plt.ylabel('Average Evaluation Score')
-    plt.title('Average Evaluation Score vs. Clock Time for Different Elo Ranges (White and Black Moves)')
-    plt.legend(title="Elo Range and Player")
-    plt.grid(True)
-    plt.plot(game_performance_black['calc_time'], game_performance_black['calc_eval'])
-    plt.savefig('temp.png')
+    
+    game_performance.to_csv(output_directory + chess_data_csv_output_list[1], mode = 'x', index = False,  encoding="utf-8")
+    
+    
 if __name__ == '__main__':
     if(len(sys.argv) >= 3):
         main()
