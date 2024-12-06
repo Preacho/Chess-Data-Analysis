@@ -74,40 +74,14 @@ def main():
     input_directory = sys.argv[1]
     output_directory = sys.argv[2]
 
-    chess_data = pd.read_csv(input_directory + chess_data_csv_input_list[6])
-    chess_data.dropna(inplace=True)
-    game_performance = chess_data.apply(lambda x: get_game_performance(x), axis = 1)    
-    game_performance = pd.concat(game_performance.tolist(), ignore_index = True)
-    
-    game_performance = game_performance[(game_performance['calc_time'] >= 0)  & (game_performance['calc_time'] <= 300)]
-    print(game_performance)
-    
-    game_performance_white = game_performance[game_performance['Player'] == 1]
-    game_performance_black = game_performance[game_performance['Player'] == 0]
+    for index in range(len(chess_data_csv_input_list)):
 
-    game_performance_white = game_performance_white.groupby('calc_time').agg({'Improvement': 'mean'}).reset_index()
-    
-    #Setting Bins and Labels. Mess with it
-    bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,
-            90,120,150,180,210,240,270,300]
-    
-    labels = ['0-5','5-10','10-15','15-20','20-25','25-30','30-35','35-40','40-45','45-50','50-55','55-60',
-              '60-90','90-120', '120-150','150-180','180-210','210-240','240-270','270-300']
-    
-    
-    game_performance_white['time_group'] = pd.cut(game_performance_white['calc_time'], bins = bins, labels = labels, right = False)
-    game_performance_white = game_performance_white.groupby('time_group').agg({'Improvement' : 'mean'}).reset_index()
-    
-    
-    plt.figure(figsize=(14, 10))
-    plt.xlabel('Clock Time (seconds)')
-    plt.ylabel('Relative Number of Improvements')
-    plt.title('Number of Imporvements vs Clock Time')
-    plt.grid(True)
-    plt.plot(game_performance_white['time_group'], game_performance_white['Improvement'])
-    plt.savefig('temp.png')
-    
-    game_performance.to_csv(output_directory + chess_data_csv_output_list[6], index = False,  encoding="utf-8")
+        chess_data = pd.read_csv(input_directory + chess_data_csv_input_list[index])
+        chess_data.dropna(inplace=True)
+        game_performance = chess_data.apply(lambda x: get_game_performance(x), axis = 1)    
+        game_performance = pd.concat(game_performance.tolist(), ignore_index = True)
+
+        game_performance.to_csv(output_directory + chess_data_csv_output_list[index], index = False,  encoding="utf-8")
     
     
 if __name__ == '__main__':
