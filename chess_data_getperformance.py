@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import sys 
 import matplotlib.pyplot as plt
+import os
 
 chess_data_csv_output_list = ['/chess_datascore0-1000Elo.csv', 
                        '/chess_datascore1000-1250Elo.csv',
@@ -73,15 +74,19 @@ def get_game_performance(game):
 def main():
     input_directory = sys.argv[1]
     output_directory = sys.argv[2]
-
+    
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+        
     for index in range(len(chess_data_csv_input_list)):
 
         chess_data = pd.read_csv(input_directory + chess_data_csv_input_list[index])
         chess_data.dropna(inplace=True)
         game_performance = chess_data.apply(lambda x: get_game_performance(x), axis = 1)    
         game_performance = pd.concat(game_performance.tolist(), ignore_index = True)
-    
+        
         game_performance = game_performance[game_performance['calc_time'] >=0]
+        
         game_performance.to_csv(output_directory + chess_data_csv_output_list[index], index = False,  encoding="utf-8")
     
     

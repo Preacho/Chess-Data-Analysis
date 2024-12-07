@@ -3,7 +3,7 @@ import chess.pgn
 import pandas as pd
 import sys
 from io import TextIOWrapper
-
+import os
 
 #Change input file to current input file
 
@@ -38,6 +38,11 @@ def main():
     chess_bracket6elo = pd.DataFrame()
     chess_bracket7elo = pd.DataFrame()
     
+    if not os.path.exists('./chess_data'):
+        os.makedirs('./chess_data')
+        print('folder created')
+    else:
+        print('folder already created')
     with open(input_file, "rb") as compressed_file:
 
     # Decompress the file
