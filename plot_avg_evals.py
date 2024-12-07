@@ -5,6 +5,7 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import linregress
+import statsmodels.api as sm
 
 
 
@@ -36,7 +37,8 @@ def main():
     for i, csv_file in enumerate(chess_data_csv_list):
         file_path = os.path.join(input_directory, csv_file)
         df = pd.read_csv(file_path)
-                
+        df['Calc_Eval'] = df.apply(lambda x: x['Calc_Eval'].astype(float) * -1.0 if x['Player'] == 0.0 else x['Calc_Eval'].astype(float), axis = 1)
+        
         # Plot scatter plot for White players
         plt.figure(figsize=(10, 5))
         white_data = df[df['Player'] == 1]
@@ -57,8 +59,7 @@ def main():
         #plt.show()
         plt.savefig(f'players_{csv_file.replace(".csv", "")}.png')
         plt.close()
-
-
+        
 
 if __name__ == '__main__':
     if len(sys.argv) >= 2:
