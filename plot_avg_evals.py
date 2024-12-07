@@ -5,7 +5,6 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import linregress
-import statsmodels.api as sm
 
 
 

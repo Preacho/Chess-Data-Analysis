@@ -125,7 +125,7 @@ def main():
                     game_data_list = []
                     add_count += 1
                     print(str(add_count) + "/150")
-                if(add_count == 130) : break
+                if(add_count == 2) : break
 
 
     # Create a DataFrame from the extracted data

@@ -3,9 +3,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
-from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from itertools import combinations
-from sklearn.preprocessing import StandardScaler
 import os
 
 def main():
