@@ -16,7 +16,7 @@ def main():
         'chess_datascore2250+Elo.csv'
     ]
 
-    threshold = 30  # Example threshold for "short" vs "long" decision times
+    threshold = 60  # Example threshold for "short" vs "long" decision times
 
     # Iterate through each CSV file to perform the Mann-Whitney U test
     for csv_file in chess_data_csv_list:
@@ -38,12 +38,12 @@ def main():
         # Perform Mann-Whitney U test on short vs long decision times for White players
         if not white_short_time_group.empty and not white_long_time_group.empty:
             u_stat, p_value = mannwhitneyu(white_short_time_group, white_long_time_group, alternative='two-sided')
-            print(f"Mann-Whitney U Test (White Short vs Long Decision Times) for {csv_file}: U-statistic = {u_stat:.3f}, p-value = {p_value:.50f}")
+            print(f"Mann-Whitney U Test (White Short vs Long Decision Times) for {csv_file}: U-statistic = {u_stat:.3f}, p-value = {p_value}")
 
         # Perform Mann-Whitney U test on short vs long decision times for Black players
         if not black_short_time_group.empty and not black_long_time_group.empty:
             u_stat, p_value = mannwhitneyu(black_short_time_group, black_long_time_group, alternative='two-sided')
-            print(f"Mann-Whitney U Test (Black Short vs Long Decision Times) for {csv_file}: U-statistic = {u_stat:.3f}, p-value = {p_value:.50f}")
+            print(f"Mann-Whitney U Test (Black Short vs Long Decision Times) for {csv_file}: U-statistic = {u_stat:.3f}, p-value = {p_value}")
 
 if __name__ == '__main__':
     if len(sys.argv) >= 2:
