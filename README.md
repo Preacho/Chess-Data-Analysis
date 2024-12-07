@@ -1,6 +1,6 @@
 # CMPT353-Chess_Project
 
-**Required Libraries to Install:**
+# Required Libraries to Install:
 
 - pip install chess
 - pip install python-chess
