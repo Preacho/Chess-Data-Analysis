@@ -1,4 +1,5 @@
 # CMPT353-Chess_Project
+Our code aims to answer the question: "Looking at different skill groups, how does time affect a player’s performance during a match?"
 
 # Required Libraries to Install:
 
@@ -8,6 +9,7 @@
 - pip install pandas
 - pip install numpy 
 - pip install matplotlib
+- pip install scipy
 
 # Files and Scripts:
 Explain the purpose of each file:
