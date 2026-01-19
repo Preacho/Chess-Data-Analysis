@@ -1,4 +1,4 @@
-# CMPT353-Chess_Project
+#Chess Data Analysis
 Our code aims to answer the question: "Looking at different skill groups, how does time affect a player’s performance during a match?"
 
 # Required Libraries to Install:
